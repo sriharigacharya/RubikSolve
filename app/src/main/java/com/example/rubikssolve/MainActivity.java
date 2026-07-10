@@ -405,6 +405,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Brief visual feedback
         Toast.makeText(this, FACE_NAMES[camCurrentFace] + " captured!", Toast.LENGTH_SHORT).show();
+
+        // Auto-advance to the next uncaptured face (in UI left-to-right order)
+        int currentBtnPos = FACE_TO_BUTTON[camCurrentFace];
+        for (int i = 1; i <= 6; i++) {
+            int nextBtnPos = (currentBtnPos + i) % 6;
+            int nextFace = CAM_BUTTON_TO_FACE[nextBtnPos];
+            if (!faceCaptured[nextFace]) {
+                camCurrentFace = nextFace;
+                updateCamFaceSelectorUI();
+                break;
+            }
+        }
     }
 
     /** Transfers scanned colors to the manual color-input screen for review. */
@@ -427,6 +439,10 @@ public class MainActivity extends AppCompatActivity {
     private void updateCamFaceSelectorUI() {
         TextView tvFaceName = viewCameraScan.findViewById(R.id.tv_cam_face_name);
         tvFaceName.setText(FACE_NAMES[camCurrentFace]);
+
+        TextView tvOrientation = viewCameraScan.findViewById(R.id.tv_cam_face_orientation);
+        int[] adj = FACE_ADJACENCY[camCurrentFace];
+        tvOrientation.setText("Top: " + COLOR_NAMES[adj[0]] + " • Right: " + COLOR_NAMES[adj[3]]);
 
         for (int i = 0; i < 6; i++) {
             int faceIdx = CAM_BUTTON_TO_FACE[i];
