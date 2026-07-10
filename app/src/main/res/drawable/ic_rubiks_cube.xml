@@ -1,0 +1,60 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Shadow/Glow under the cube -->
+    <path
+        android:fillColor="#158B5CF6"
+        android:pathData="M60,95 C75,95 90,87 90,80 C90,73 75,65 60,65 C45,65 30,73 30,80 C30,87 45,95 60,95 Z" />
+
+    <!-- Isometric Rubik's Cube -->
+    <!-- Base black shape for borders -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M60,10 L102,34 L102,82 L60,106 L18,82 L18,34 Z" />
+
+    <!-- TOP FACE (Yellow Theme / White Theme) -->
+    <!-- Center Column -->
+    <path android:fillColor="#FFD500" android:pathData="M60,13 L72,20 L60,27 L48,20 Z" />
+    <path android:fillColor="#009B48" android:pathData="M60,29 L72,36 L60,43 L48,36 Z" />
+    <path android:fillColor="#FF5800" android:pathData="M60,45 L72,52 L60,59 L48,52 Z" />
+    <!-- Left Column -->
+    <path android:fillColor="#B71234" android:pathData="M46,21 L58,28 L46,35 L34,28 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M46,37 L58,44 L46,51 L34,44 Z" />
+    <path android:fillColor="#0046AD" android:pathData="M32,29 L44,36 L32,43 L20,36 Z" />
+    <!-- Right Column -->
+    <path android:fillColor="#009B48" android:pathData="M74,21 L86,28 L74,35 L62,28 Z" />
+    <path android:fillColor="#FF5800" android:pathData="M74,37 L86,44 L74,51 L62,44 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M88,29 L100,36 L88,43 L76,36 Z" />
+
+    <!-- LEFT FACE (Orange/Red/Green Theme) -->
+    <!-- Top Row -->
+    <path android:fillColor="#0046AD" android:pathData="M20,39 L45,53 L45,67 L20,53 Z" />
+    <path android:fillColor="#FF5800" android:pathData="M48,55 L58,61 L58,75 L48,69 Z" />
+    <path android:fillColor="#B71234" android:pathData="M34,47 L44,53 L44,67 L34,61 Z" />
+    <!-- Middle Row -->
+    <path android:fillColor="#FFD500" android:pathData="M20,55 L31,61 L31,75 L20,69 Z" />
+    <path android:fillColor="#009B48" android:pathData="M34,63 L44,69 L44,83 L34,77 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M48,71 L58,77 L58,91 L48,85 Z" />
+    <!-- Bottom Row -->
+    <path android:fillColor="#B71234" android:pathData="M20,71 L31,77 L31,91 L20,85 Z" />
+    <path android:fillColor="#FF5800" android:pathData="M34,79 L44,85 L44,99 L34,93 Z" />
+    <path android:fillColor="#0046AD" android:pathData="M48,87 L58,93 L58,103 L48,99 Z" />
+
+    <!-- RIGHT FACE (Blue/White/Red Theme) -->
+    <!-- Top Row -->
+    <path android:fillColor="#B71234" android:pathData="M62,55 L72,49 L72,63 L62,69 Z" />
+    <path android:fillColor="#009B48" android:pathData="M76,47 L86,41 L86,55 L76,61 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M90,39 L100,33 L100,47 L90,53 Z" />
+    <!-- Middle Row -->
+    <path android:fillColor="#0046AD" android:pathData="M62,71 L72,65 L72,79 L62,85 Z" />
+    <path android:fillColor="#FFD500" android:pathData="M76,63 L86,57 L86,71 L76,77 Z" />
+    <path android:fillColor="#FF5800" android:pathData="M90,55 L100,49 L100,63 L90,69 Z" />
+    <!-- Bottom Row -->
+    <path android:fillColor="#009B48" android:pathData="M62,87 L72,81 L72,95 L62,101 Z" />
+    <path android:fillColor="#B71234" android:pathData="M76,79 L86,73 L86,87 L76,93 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M90,71 L100,65 L100,79 L90,85 Z" />
+
+</vector>

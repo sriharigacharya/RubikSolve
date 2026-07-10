@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Cube face diagram: 3×3 grid with a COUNTER-CLOCKWISE curved arrow.
+    Mirror of ic_move_cw.xml — arrow sweeps CCW.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- 3×3 grid cells -->
+    <!-- Row 0 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,12 L32,12 32,32 12,32 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,12 L58,12 58,32 38,32 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,12 L84,12 84,32 64,32 Z" />
+    <!-- Row 1 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,38 L32,38 32,58 12,58 Z" />
+    <path android:fillColor="#80FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,38 L58,38 58,58 38,58 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,38 L84,38 84,58 64,58 Z" />
+    <!-- Row 2 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,64 L32,64 32,84 12,84 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,64 L58,64 58,84 38,84 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,64 L84,64 84,84 64,84 Z" />
+
+    <!--
+        CCW circular arrow.
+        Same circle but sweep-flag=0 (counter-clockwise).
+        Starts at top (48,4), sweeps CCW (~300°) ending near bottom-right.
+    -->
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M48,4 A44,44 0 1,0 84,70" />
+    <!-- Arrowhead at (84,70) pointing CCW (down-right → right) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M91,63 L82,74 L77,62 Z" />
+
+</vector>

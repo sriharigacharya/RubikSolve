@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base App Palette (Dark Theme) -->
+    <color name="bg_dark">#0F0F13</color>
+    <color name="bg_surface">#1B1B22</color>
+    <color name="text_primary">#F4F4F5</color>
+    <color name="text_secondary">#A1A1AA</color>
+    <color name="accent_primary">#8B5CF6</color>
+    <color name="accent_primary_glow">#4C1D95</color>
+    
+    <!-- Rubik's Colors -->
+    <color name="rubik_white">#FFFFFF</color>
+    <color name="rubik_yellow">#FFD500</color>
+    <color name="rubik_green">#009B48</color>
+    <color name="rubik_blue">#0046AD</color>
+    <color name="rubik_red">#B71234</color>
+    <color name="rubik_orange">#FF5800</color>
+    <color name="rubik_unassigned">#2C2C35</color>
+</resources>

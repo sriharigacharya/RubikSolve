@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Cube face diagram: 3×3 grid with a CLOCKWISE curved arrow.
+    Viewport 96×96. All shapes white so app:tint can recolor them.
+    Grid occupies centre; arrow sweeps CW around the outside.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- 3×3 grid cells (semi-transparent fill, white outline) -->
+    <!-- Row 0 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,12 L32,12 32,32 12,32 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,12 L58,12 58,32 38,32 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,12 L84,12 84,32 64,32 Z" />
+    <!-- Row 1 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,38 L32,38 32,58 12,58 Z" />
+    <path android:fillColor="#80FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,38 L58,38 58,58 38,58 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,38 L84,38 84,58 64,58 Z" />
+    <!-- Row 2 -->
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M12,64 L32,64 32,84 12,84 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M38,64 L58,64 58,84 38,84 Z" />
+    <path android:fillColor="#40FFFFFF" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.2"
+        android:pathData="M64,64 L84,64 84,84 64,84 Z" />
+
+    <!--
+        CW circular arrow.
+        Arc: centre (48,48), radius 44 (so it clears the 12-px grid margin).
+        Starts at top (48,4), sweeps CW (~300°) to end near bottom-left.
+        Arrowhead at end pointing further clockwise (right-downward direction).
+    -->
+    <path
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M48,4 A44,44 0 1,1 12,70" />
+    <!-- Arrowhead at (12,70) pointing clockwise (down-left → left) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M5,63 L14,74 L19,62 Z" />
+
+</vector>

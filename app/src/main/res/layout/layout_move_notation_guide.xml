@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <!-- Fixed top bar -->
+    <LinearLayout
+        android:id="@+id/ll_guide_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:background="@color/bg_dark"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_notation_back"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Back"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Move Notation Guide"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <!-- Spacer to balance back button -->
+        <View android:layout_width="72dp" android:layout_height="1dp" />
+    </LinearLayout>
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:id="@+id/sv_notation_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/ll_guide_topbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- ── INTRO ─────────────────────────────────────── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#1B1B22"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#2E2E3A">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="How to Read Move Notation"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• A letter alone (R) means a 90° clockwise turn of that face.\n• A letter with ′ (R′) means 90° counter-clockwise.\n• A letter with 2 (R2) means a 180° half-turn (direction doesn't matter).\n\nAll moves assume you hold the cube with White on top and Green facing you."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:lineSpacingMultiplier="1.4" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ═══════════════════════════════════════════════
+                 U — UP (WHITE) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="U · Up Face"
+                android:textColor="@color/rubik_white"
+                android:background="#22FFFFFF"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- U -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_u"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- U' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_u_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- U2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_u2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ═══════════════════════════════════════════════
+                 D — DOWN (YELLOW) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="D · Down Face"
+                android:textColor="@color/rubik_yellow"
+                android:background="#22FFD500"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- D -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- D' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_d_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- D2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_d2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ═══════════════════════════════════════════════
+                 F — FRONT (GREEN) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="F · Front Face"
+                android:textColor="@color/rubik_green"
+                android:background="#22009B48"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- F -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- F' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_f_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- F2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_f2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ═══════════════════════════════════════════════
+                 B — BACK (BLUE) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="B · Back Face"
+                android:textColor="@color/rubik_blue"
+                android:background="#220046AD"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- B -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- B' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_b_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- B2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_b2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ═══════════════════════════════════════════════
+                 L — LEFT (ORANGE) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="L · Left Face"
+                android:textColor="@color/rubik_orange"
+                android:background="#22FF5800"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- L -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_l"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- L' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_l_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- L2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_l2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- ═══════════════════════════════════════════════
+                 R — RIGHT (RED) FACE
+                 ═══════════════════════════════════════════════ -->
+            <TextView style="@style/SectionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="R · Right Face"
+                android:textColor="@color/rubik_red"
+                android:background="#22B71234"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- R -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_r"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- R' -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_r_prime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- R2 -->
+            <include layout="@layout/item_move_card"
+                android:id="@+id/card_move_r2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

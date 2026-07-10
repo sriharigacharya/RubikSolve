@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/tv_input_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paint Cube Faces"
+        android:textColor="@color/text_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_input_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select face and tap cells to paint colors"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_input_header"
+        android:layout_marginTop="4dp" />
+
+    <!-- Face Selector: colored circles showing each face's center color -->
+    <!-- Layout order: U(White), L(Orange), F(Green), R(Red), B(Blue), D(Yellow) -->
+    <LinearLayout
+        android:id="@+id/ll_face_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_input_sub"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <!-- UP face — White center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_u"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Up"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- LEFT face — Orange center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_l"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Left"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- FRONT face — Green center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_f"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Front"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- RIGHT face — Red center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_r"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Right"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- BACK face — Blue center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_b"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- DOWN face — Yellow center -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="4dp"
+            android:clickable="false">
+
+            <View
+                android:id="@+id/face_circle_d"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Down"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:layout_marginTop="3dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_current_face_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRONT FACE (Green Center)"
+        android:textColor="@color/accent_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_face_selector"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!--
+        Orientation Compass + Grid: a 3-column layout
+        [ LEFT label ] [ TOP label + Grid + BOTTOM label ] [ RIGHT label ]
+    -->
+    <LinearLayout
+        android:id="@+id/ll_orientation_compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_current_face_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <!-- LEFT adjacent face indicator -->
+        <LinearLayout
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/orient_left_color"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@color/rubik_orange" />
+
+            <TextView
+                android:id="@+id/orient_left_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEFT"
+                android:textColor="@color/text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/orient_left_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orange"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <!-- Center column: TOP label, Grid, BOTTOM label -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- TOP adjacent face -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:id="@+id/orient_top_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TOP"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
+
+                <View
+                    android:id="@+id/orient_top_color"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/rubik_white" />
+
+                <TextView
+                    android:id="@+id/orient_top_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="White"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="8sp"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <!-- 3x3 Grid of Facelets (Wrapped in a black frame card) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_grid_container"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                app:cardBackgroundColor="#000000"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/accent_primary">
+
+                <GridLayout
+                    android:id="@+id/grid_facelets"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="3"
+                    android:rowCount="3"
+                    android:padding="8dp">
+
+                    <View android:id="@+id/cell_0" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+                    <View android:id="@+id/cell_1" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+                    <View android:id="@+id/cell_2" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+
+                    <View android:id="@+id/cell_3" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+                    <!-- Center cell (non-clickable, locked center) -->
+                    <View android:id="@+id/cell_4" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_green" clickable="false" focusable="false" />
+                    <View android:id="@+id/cell_5" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+
+                    <View android:id="@+id/cell_6" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+                    <View android:id="@+id/cell_7" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+                    <View android:id="@+id/cell_8" android:layout_width="0dp" android:layout_height="0dp" android:layout_columnWeight="1" android:layout_rowWeight="1" android:layout_margin="4dp" android:background="@color/rubik_unassigned" clickable="true" focusable="true" />
+
+                </GridLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- BOTTOM adjacent face -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="6dp">
+
+                <View
+                    android:id="@+id/orient_bottom_color"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:background="@color/rubik_yellow" />
+
+                <TextView
+                    android:id="@+id/orient_bottom_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yellow"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="8sp"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/orient_bottom_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BOTTOM"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- RIGHT adjacent face indicator -->
+        <LinearLayout
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/orient_right_color"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@color/rubik_red" />
+
+            <TextView
+                android:id="@+id/orient_right_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RIGHT"
+                android:textColor="@color/text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/orient_right_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red"
+                android:textColor="@color/text_secondary"
+                android:textSize="8sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Color Palette Row -->
+    <LinearLayout
+        android:id="@+id/ll_color_palette"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_orientation_compass"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:id="@+id/palette_white"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_white"
+            android:contentDescription="White" />
+
+        <ImageButton
+            android:id="@+id/palette_orange"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_orange"
+            android:contentDescription="Orange" />
+
+        <ImageButton
+            android:id="@+id/palette_green"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_green"
+            android:contentDescription="Green" />
+
+        <ImageButton
+            android:id="@+id/palette_red"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_red"
+            android:contentDescription="Red" />
+
+        <ImageButton
+            android:id="@+id/palette_blue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_blue"
+            android:contentDescription="Blue" />
+
+        <ImageButton
+            android:id="@+id/palette_yellow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/palette_item_selector"
+            android:backgroundTint="@color/rubik_yellow"
+            android:contentDescription="Yellow" />
+
+    </LinearLayout>
+
+    <!-- Navigation Controls (Previous Face, Next Face, Reset Face) -->
+    <RelativeLayout
+        android:id="@+id/rl_nav_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_color_palette"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_prev_face"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Prev"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_reset_face"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Clear Face"
+            android:textColor="@color/rubik_red" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next_face"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Next"
+            app:cornerRadius="8dp" />
+
+    </RelativeLayout>
+
+    <!-- Solve Button (Bottom Screen) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_solve_run"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Find Solution"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/accent_primary"
+        app:cornerRadius="12dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
