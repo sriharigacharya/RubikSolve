@@ -20,7 +20,13 @@ A native Android app that **scans a scrambled Rubik's Cube with your phone camer
 
 ## 📱 Screenshots
 
-> _Add screenshots here once the app is running on a device._
+| Home | Menu | Camera Scan |
+|:---:|:---:|:---:|
+| ![Home](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.34%20PM.jpeg) | ![Menu](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.34%20PM%20(1).jpeg) | ![Camera Scan](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.33%20PM.jpeg) |
+
+| Manual Input | Solution Step | Notation Guide |
+|:---:|:---:|:---:|
+| ![Manual Input](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.33%20PM%20(1).jpeg) | ![Solution](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.32%20PM.jpeg) | ![Notation Guide](Screenshots/WhatsApp%20Image%202026-09-30%20at%204.13.32%20PM%20(1).jpeg) |
 
 ---
 
