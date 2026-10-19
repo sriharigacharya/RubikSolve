@@ -51,13 +51,26 @@ public class CubeModelTest {
 
     @Test
     public void moveThenInverseIsIdentity() {
-        String[] moves = {"R", "L", "U", "D", "F", "B", "R'", "U2", "F2"};
+        String[] moves = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "U2", "D2", "R2", "L2", "F2", "B2"};
         for (String m : moves) {
             int[][] f = solvedTestFacelets();
             CubeModel model = new CubeModel(f);
             model.applyMove(m);
             model.applyMove(Move.invert(m));
             assertTrue(m + " then " + Move.invert(m) + " should be identity", isSolved(model, f));
+        }
+    }
+
+    @Test
+    public void invertAlwaysNegatesQuarterTurns() {
+        String[] moves = {"R", "L", "U", "D", "F", "B", "R'", "L'", "U'", "D'", "F'", "B'", "U2", "D2", "R2", "L2", "F2", "B2"};
+        for (String m : moves) {
+            Move forward = Move.parse(m);
+            Move backward = Move.parse(Move.invert(m));
+            assertEquals("Axis must match for " + m, forward.axis, backward.axis);
+            assertEquals("Layer must match for " + m, forward.layer, backward.layer);
+            assertEquals("Quarter turns must be exactly negated for " + m,
+                    -forward.quarterTurns, backward.quarterTurns);
         }
     }
 

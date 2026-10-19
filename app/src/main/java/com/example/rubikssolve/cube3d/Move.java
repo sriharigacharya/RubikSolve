@@ -26,9 +26,10 @@ public final class Move {
         this.quarterTurns = quarterTurns;
     }
 
-    /** Parse a standard Kociemba move string such as "R", "U'", "F2". */
+    /** Parse a standard Kociemba move string such as "R", "U'", "F2", or inverse double move "F2'". */
     public static Move parse(String m) {
-        if (m == null || m.isEmpty()) throw new IllegalArgumentException("Empty move");
+        if (m == null || m.trim().isEmpty()) throw new IllegalArgumentException("Empty move");
+        m = m.trim();
         int axis, layer, dir;
         switch (m.charAt(0)) {
             case 'U': axis = 1; layer =  1; dir = -1; break;
@@ -39,19 +40,24 @@ public final class Move {
             case 'B': axis = 2; layer = -1; dir =  1; break;
             default:  throw new IllegalArgumentException("Unknown face: " + m);
         }
-        if (m.endsWith("'")) dir = -dir;
-        int turns = m.endsWith("2") ? 2 : 1;
+        if (m.contains("'")) dir = -dir;
+        int turns = m.contains("2") ? 2 : 1;
         return new Move(axis, layer, dir * turns);
     }
 
     /**
-     * Returns the inverse move string.
-     * R2 → R2, R → R', R' → R.
+     * Returns the inverse move string with opposite rotational direction.
+     * R  → R'
+     * R' → R
+     * R2 → R2' (reverses the 180° rotation visually)
+     * R2' → R2
      */
     public static String invert(String m) {
-        if (m == null || m.isEmpty()) throw new IllegalArgumentException("Empty move");
-        if (m.endsWith("2")) return m;                   // 180° is self-inverse
-        if (m.endsWith("'")) return m.substring(0, 1);  // R' → R
-        return m + "'";                                  // R  → R'
+        if (m == null || m.trim().isEmpty()) throw new IllegalArgumentException("Empty move");
+        m = m.trim();
+        if (m.endsWith("2'")) return m.substring(0, 1) + "2";
+        if (m.endsWith("2"))  return m + "'";
+        if (m.endsWith("'"))  return m.substring(0, 1);
+        return m + "'";
     }
 }
