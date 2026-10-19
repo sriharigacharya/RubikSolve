@@ -60,7 +60,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_guide_move" />
 
-    <!-- Visual Aid Card -->
+    <!-- 3D Interactive Rubik's Cube Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_visual_aid"
         android:layout_width="match_parent"
@@ -69,56 +69,37 @@
         app:cardCornerRadius="16dp"
         app:strokeWidth="1dp"
         app:strokeColor="#2C2C35"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/tv_guide_description"
         app:layout_constraintBottom_toTopOf="@id/tv_full_sequence_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp">
+            >
 
-            <!-- Face visual showing which face to turn -->
-            <TextView
-                android:id="@+id/tv_visual_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Face to turn: RIGHT (Red)"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
-
-            <!-- Isometric Arrow drawing to indicate turn direction -->
-            <ImageView
-                android:id="@+id/img_turn_arrow"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arrow_ccw"
-                app:tint="@color/accent_primary"
-                app:layout_constraintTop_toBottomOf="@id/tv_visual_title"
-                app:layout_constraintBottom_toTopOf="@id/tv_visual_tip"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+            <com.example.rubikssolve.cube3d.CubeView
+                android:id="@+id/cube_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_visual_tip"
+                android:id="@+id/tv_cube_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hold White on Top, Green in Front"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:background="#6618181B"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="🔄 Drag to rotate 3D view"
                 android:textColor="@color/text_secondary"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:textSize="11sp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

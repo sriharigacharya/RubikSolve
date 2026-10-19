@@ -26,6 +26,9 @@ import androidx.camera.view.PreviewView;
 import com.example.rubikssolve.camera.CameraScanController;
 import com.example.rubikssolve.camera.CubeColorClassifier;
 import com.example.rubikssolve.camera.ScanOverlayView;
+import com.example.rubikssolve.cube3d.CubeModel;
+import com.example.rubikssolve.cube3d.CubeView;
+import com.example.rubikssolve.cube3d.Move;
 import com.example.rubikssolve.solver.Search;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -165,11 +168,10 @@ public class MainActivity extends AppCompatActivity {
     private LinearProgressIndicator progressSolveSteps;
     private TextView tvGuideMove;
     private TextView tvGuideDescription;
-    private TextView tvVisualTitle;
-    private ImageView imgTurnArrow;
     private LinearLayout llFullSequenceContainer;
     private MaterialButton btnGuidePrev;
     private MaterialButton btnGuideNext;
+    private CubeView cubeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,6 +273,9 @@ public class MainActivity extends AppCompatActivity {
         if (viewToShow != viewCameraScan && cameraScanController != null) {
             cameraScanController.shutdown();
             cameraScanController = null;
+        }
+        if (viewToShow != viewSolveGuide && cubeView != null) {
+            cubeView.cancelMoves();
         }
     }
 
@@ -933,6 +938,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Open solve guide screen
         showView(viewSolveGuide);
+        if (cubeView != null) {
+            cubeView.setCube(new CubeModel(cubeColors));
+        }
         updateSolveGuideUI();
     }
 
@@ -946,12 +954,11 @@ public class MainActivity extends AppCompatActivity {
 
     // --- SOLVE GUIDE SCREEN SETUP ---
     private void setupSolveGuideScreen() {
+        cubeView = findViewById(R.id.cube_view);
         tvGuideStep = findViewById(R.id.tv_guide_step);
         progressSolveSteps = findViewById(R.id.progress_solve_steps);
         tvGuideMove = findViewById(R.id.tv_guide_move);
         tvGuideDescription = findViewById(R.id.tv_guide_description);
-        tvVisualTitle = findViewById(R.id.tv_visual_title);
-        imgTurnArrow = findViewById(R.id.img_turn_arrow);
         llFullSequenceContainer = findViewById(R.id.ll_full_sequence_container);
         btnGuidePrev = findViewById(R.id.btn_guide_prev);
         btnGuideNext = findViewById(R.id.btn_guide_next);
@@ -959,6 +966,9 @@ public class MainActivity extends AppCompatActivity {
         btnGuidePrev.setOnClickListener(v -> {
             if (currentStep > 0) {
                 currentStep--;
+                if (cubeView != null) {
+                    cubeView.playMove(Move.invert(moves.get(currentStep)));
+                }
                 updateSolveGuideUI();
             } else {
                 // Return to color entry
@@ -967,20 +977,67 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnGuideNext.setOnClickListener(v -> {
-            if (currentStep < moves.size() - 1) {
+            if (currentStep < moves.size()) {
+                if (cubeView != null) {
+                    cubeView.playMove(moves.get(currentStep));
+                }
                 currentStep++;
                 updateSolveGuideUI();
             } else {
-                // Completed! Show success dialog and return home
+                // Already at solved state, user pressed "Finish"
                 showSuccessDialog();
             }
         });
+    }
+
+    private void jumpToStep(int targetStep) {
+        if (targetStep < 0 || targetStep > moves.size() || targetStep == currentStep) return;
+        currentStep = targetStep;
+        if (cubeView != null) {
+            CubeModel m = new CubeModel(cubeColors);
+            for (int k = 0; k < currentStep; k++) {
+                m.applyMove(moves.get(k));
+            }
+            cubeView.setCube(m);
+        }
+        updateSolveGuideUI();
     }
 
     private void updateSolveGuideUI() {
         if (moves.isEmpty()) return;
 
         int totalSteps = moves.size();
+
+        // When all moves have been applied, cube is in solved state
+        if (currentStep >= totalSteps) {
+            tvGuideStep.setText("Solved (" + totalSteps + " of " + totalSteps + ")");
+            progressSolveSteps.setProgress(100);
+            tvGuideMove.setText("✓");
+            tvGuideDescription.setText("All moves completed! Your Rubik's cube is solved.");
+            btnGuideNext.setText("Finish");
+
+            llFullSequenceContainer.removeAllViews();
+            for (int i = 0; i < totalSteps; i++) {
+                TextView tv = new TextView(this);
+                tv.setText(moves.get(i));
+                tv.setTextSize(16);
+                tv.setPadding(dpToPx(12), dpToPx(8), dpToPx(12), dpToPx(8));
+                tv.setGravity(Gravity.CENTER);
+
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                lp.setMargins(dpToPx(4), 0, dpToPx(4), 0);
+                tv.setLayoutParams(lp);
+                tv.setTextColor(getResources().getColor(R.color.text_secondary));
+
+                final int stepIndex = i;
+                tv.setOnClickListener(v -> jumpToStep(stepIndex));
+                llFullSequenceContainer.addView(tv);
+            }
+            return;
+        }
+
         tvGuideStep.setText("Step " + (currentStep + 1) + " of " + totalSteps);
         
         // Update progress bar
@@ -1005,15 +1062,6 @@ public class MainActivity extends AppCompatActivity {
         tvGuideDescription.setText("Rotate the " + faceName + " face " + direction + " 90 degrees.");
         if (modifier == '2') {
             tvGuideDescription.setText("Rotate the " + faceName + " face " + direction + ".");
-        }
-
-        tvVisualTitle.setText("Turn Face: " + faceName.toUpperCase());
-
-        // Update direction arrow graphic
-        if (modifier == '\'') {
-            imgTurnArrow.setImageResource(R.drawable.ic_arrow_ccw);
-        } else {
-            imgTurnArrow.setImageResource(R.drawable.ic_arrow_cw); // CW is fallback for single or double turns
         }
 
         // Update horizontal scroll list of moves
@@ -1043,15 +1091,14 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 tv.setTextColor(getResources().getColor(R.color.text_secondary));
             }
+
+            final int stepIndex = i;
+            tv.setOnClickListener(v -> jumpToStep(stepIndex));
+
             llFullSequenceContainer.addView(tv);
         }
 
-        // Make button say "Done" on last step
-        if (currentStep == totalSteps - 1) {
-            btnGuideNext.setText("Done");
-        } else {
-            btnGuideNext.setText("Next");
-        }
+        btnGuideNext.setText("Next");
     }
 
     private String getFaceFullName(char face) {
@@ -1071,7 +1118,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("Solved!")
                 .setMessage("Congratulations! Your Rubik's cube should now be solved!")
                 .setPositiveButton("Back to Home", (dialog, which) -> showView(viewHome))
-                .setCancelable(false)
+                .setNegativeButton("Keep Viewing", null)
                 .show();
     }
 
